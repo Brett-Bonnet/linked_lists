@@ -1,3 +1,4 @@
+
 class LinkedList
   attr_accessor :head, :tail
   
@@ -8,28 +9,31 @@ class LinkedList
   end
 
   def append(value)
-    node = Node.new
-    node.value = value
     if @head == nil
-      @head = node
-    else node.next_node = node
-         @tail = node
+      prepend(value)
+    else node = @head
+      while node.next_node != nil do
+        node = node.next_node
+      end
+        node.next_node = Node.new
+        node.next_node.value = value
+        @tail = node.next_node
     end
     @size += 1
   end
   
   def prepend(value)
-    node = Node.new
-    node.value = value
-    @head = node
+      @head = Node.new
+      @head.value = value
+      @size += 1
   end
   
   def size
-    puts @size
+    @size
   end
   
   def head
-    puts @head
+    @head
   end
   
   def tail
@@ -37,27 +41,45 @@ class LinkedList
   end
   
   def at(index)
+    node = @head
+    i = 0
+    while node != nil do
+      return node if i == index
+      node = node.next_node
+      i += 1
+    end
+
   end
   
   def pop
+    @tail = nil
   end
   
-  def contains?
+  def contains?(text)
+    node = @head
+    contains = false
+    while node != nil do
+      if node.value == text
+        contains = true
+        break
+      else node = node.next_node
+        false
+      end
+    end
+    contains
   end
   
   def find(data)
   end
   
   def to_s
-    print "(#{@head.value}[HEAD]next=#{@head.next_node.value})" + " -> "
-    i = 1
-    while i <= @size do
-     
-     i += 1 
+    node = @head
+    while node != nil do
+      print "(#{node.value})" + " -> "
+      node = node.next_node
     end
-    if !@tail.nil?
-      puts "(#{@tail.value}[TAIL]next=#{@tail.next_node.value})" + " -> " + "nil"
-    else print "nil"
+    if node.nil?
+      print "nil"
     end
   end
 
