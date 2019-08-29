@@ -1,4 +1,3 @@
-
 class LinkedList
   attr_accessor :head, :tail
   
@@ -70,6 +69,14 @@ class LinkedList
   end
   
   def find(data)
+    node = @head
+    index = 0
+    while node != nil do
+      return index if data == node.value
+      node = node.next_node
+      index += 1
+      nil
+    end
   end
   
   def to_s
@@ -83,7 +90,19 @@ class LinkedList
     end
   end
 
-  def insert_at(index)
+  def insert_at(index, value)
+    inserted = Node.new
+    inserted.value = value
+    current = @head
+    i = 0
+    while i != index do
+        previous = current
+        current = current.next_node
+        i += 1
+    end
+    previous.next_node = inserted
+    inserted.next_node = current
+
   end
 
   def remove_at(index) 
