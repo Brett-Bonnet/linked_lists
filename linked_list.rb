@@ -1,5 +1,5 @@
 class LinkedList
-  attr_accessor :head, :tail
+  attr_reader :head, :tail
   
   def initialize()
     @head = nil
@@ -47,7 +47,6 @@ class LinkedList
       node = node.next_node
       i += 1
     end
-
   end
   
   def pop
@@ -106,6 +105,14 @@ class LinkedList
   end
 
   def remove_at(index) 
+    current = @head
+    i = 0
+    while i != index do
+      previous = current
+      current = current.next_node
+      i += 1
+    end
+    previous.next_node = current.next_node
   end
 
 end
