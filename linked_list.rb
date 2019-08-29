@@ -1,5 +1,5 @@
 class LinkedList
-  attr_reader :head, :tail
+  attr_reader :head, :tail, :size
   
   def initialize()
     @head = nil
@@ -17,18 +17,25 @@ class LinkedList
         node.next_node = Node.new
         node.next_node.value = value
         @tail = node.next_node
+        @size += 1
     end
-    @size += 1
   end
   
   def prepend(value)
-      @head = Node.new
-      @head.value = value
+      new_node = Node.new
+      new_node.value = value
+      if @head.nil?
+        @head = new_node
+        @tail = @head
+      else
+        new_node.next_node = @head
+        @head = new_node
+      end
       @size += 1
   end
   
   def size
-    @size
+    puts @size
   end
   
   def head
@@ -43,7 +50,7 @@ class LinkedList
     node = @head
     i = 0
     while node != nil do
-      return node if i == index
+      return node.value if i == index
       node = node.next_node
       i += 1
     end
@@ -51,6 +58,7 @@ class LinkedList
   
   def pop
     @tail = nil
+    @size -= 1
   end
   
   def contains?(text)
@@ -101,7 +109,7 @@ class LinkedList
     end
     previous.next_node = inserted
     inserted.next_node = current
-
+    @size += 1
   end
 
   def remove_at(index) 
@@ -113,6 +121,7 @@ class LinkedList
       i += 1
     end
     previous.next_node = current.next_node
+    @size -= 1
   end
 
 end
