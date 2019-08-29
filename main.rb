@@ -5,7 +5,7 @@ require './node.rb'
 list = LinkedList.new
 first = list.append("number 1")
 second = list.append("number 2")
-third = list.append("number 3"
+third = list.append("number 3")
 list.to_s
 list.prepend("new number 1")
 puts list.size
